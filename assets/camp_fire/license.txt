@@ -1,0 +1,11 @@
+Model Information:
+* title:	Camp Fire
+* source:	https://sketchfab.com/3d-models/camp-fire-3e1b91e633e64995b4023523edb3e237
+* author:	YannisTH (https://sketchfab.com/YannisTH)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Camp Fire" (https://sketchfab.com/3d-models/camp-fire-3e1b91e633e64995b4023523edb3e237) by YannisTH (https://sketchfab.com/YannisTH) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

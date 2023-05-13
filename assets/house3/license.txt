@@ -1,0 +1,11 @@
+Model Information:
+* title:	Japanese house "minka"
+* source:	https://sketchfab.com/3d-models/japanese-house-minka-1b757cde000240cb84d571032946bfe6
+* author:	kolya5561 (https://sketchfab.com/kolya5561)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Japanese house "minka"" (https://sketchfab.com/3d-models/japanese-house-minka-1b757cde000240cb84d571032946bfe6) by kolya5561 (https://sketchfab.com/kolya5561) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

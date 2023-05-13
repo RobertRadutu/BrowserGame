@@ -1,0 +1,11 @@
+Model Information:
+* title:	Kokura Castle
+* source:	https://sketchfab.com/3d-models/kokura-castle-aba23531911c45439067a6e0aaccad07
+* author:	AVATTA (https://sketchfab.com/avatta)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Kokura Castle" (https://sketchfab.com/3d-models/kokura-castle-aba23531911c45439067a6e0aaccad07) by AVATTA (https://sketchfab.com/avatta) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

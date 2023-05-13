@@ -2,7 +2,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118/build/three.mod
 
 import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/FBXLoader.js';
 import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/GLTFLoader.js';
-
+import {Actors} from './Actors.js';
 
 class BasicCharacterControllerProxy {
   constructor(animations) {
@@ -511,8 +511,16 @@ class ThirdPersonCamera {
   }
 }
 
+class Pos{
+  constructor(x, y ,z){
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+}
 
-class ThirdPersonCameraDemo {
+
+class Core{
   constructor() {
     this._Initialize();
   }
@@ -536,7 +544,7 @@ class ThirdPersonCameraDemo {
     const fov = 60;
     const aspect = 1920 / 1080;
     const near = 1.0;
-    const far = 1000.0;
+    const far = 5000.0;
     this._camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     this._camera.position.set(25, 10, 25);
 
@@ -547,16 +555,16 @@ class ThirdPersonCameraDemo {
     light.target.position.set(0, 0, 0);
     light.castShadow = true;
     light.shadow.bias = -0.001;
-    light.shadow.mapSize.width = 4096;
-    light.shadow.mapSize.height = 4096;
+    light.shadow.mapSize.width = 8192;
+    light.shadow.mapSize.height = 8192;
     light.shadow.camera.near = 0.1;
-    light.shadow.camera.far = 500.0;
+    light.shadow.camera.far = 1000.0;
     light.shadow.camera.near = 0.5;
-    light.shadow.camera.far = 500.0;
-    light.shadow.camera.left = 50;
-    light.shadow.camera.right = -50;
-    light.shadow.camera.top = 50;
-    light.shadow.camera.bottom = -50;
+    light.shadow.camera.far = 1000.0;
+    light.shadow.camera.left = 100;
+    light.shadow.camera.right = -100;
+    light.shadow.camera.top = 100;
+    light.shadow.camera.bottom = -100;
     this._scene.add(light);
 
     light = new THREE.AmbientLight(0xFFFFFF, 0.25);
@@ -571,6 +579,7 @@ class ThirdPersonCameraDemo {
         './resources/posz.jpg',
         './resources/negz.jpg',
     ]);
+
     texture.encoding = THREE.sRGBEncoding;
     this._scene.background = texture;
 
@@ -588,19 +597,193 @@ class ThirdPersonCameraDemo {
     plane.rotation.x = -Math.PI / 2;
     this._scene.add(plane);
 
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load('./assets/house1/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = 100;
+      gltfScene.scene.position.y = -20;
+      gltfScene.scene.position.z = -500;
+      gltfScene.scene.scale.set(15, 15, 15);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/house1/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = -100;
+      gltfScene.scene.position.y = -20;
+      gltfScene.scene.position.z = -500;
+      gltfScene.scene.scale.set(15, 15, 15);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/house2/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = -500;
+      gltfScene.scene.position.y = 55.5;
+      gltfScene.scene.position.z = -200;
+      gltfScene.scene.scale.set(300, 300, 300);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/house2/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = -500;
+      gltfScene.scene.position.y = 55.5;
+      gltfScene.scene.position.z = 200;
+      gltfScene.scene.scale.set(300, 300, 300);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/house3/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = -500;
+      gltfScene.scene.position.y = 0;
+      gltfScene.scene.position.z = -200;
+      gltfScene.scene.scale.set(50, 50, 50);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/house3/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = 500;
+      gltfScene.scene.position.y = 0;
+      gltfScene.scene.position.z = -200;
+      gltfScene.scene.scale.set(50, 50, 50);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/rose_tree/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = -250;
+      gltfScene.scene.position.y = 0;
+      gltfScene.scene.position.z = 20;
+      gltfScene.scene.rotation.y = -80;
+      gltfScene.scene.scale.set(0.2, 0.2, 0.2);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/rose_tree/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = -250;
+      gltfScene.scene.position.y = 0;
+      gltfScene.scene.position.z = -90;
+      gltfScene.scene.rotation.y = -80;
+      gltfScene.scene.scale.set(0.2, 0.2, 0.2);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/rose_tree/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = -250;
+      gltfScene.scene.position.y = 0;
+      gltfScene.scene.position.z = -380;
+      gltfScene.scene.rotation.y = -80;
+      gltfScene.scene.scale.set(0.2, 0.2, 0.2);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/rose_tree/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = -250;
+      gltfScene.scene.position.y = 0;
+      gltfScene.scene.position.z = 300;
+      gltfScene.scene.rotation.y = -80;
+      gltfScene.scene.scale.set(0.2, 0.2, 0.2);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/tree_man/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = -250;
+      gltfScene.scene.position.y = 30;
+      gltfScene.scene.position.z = -45;
+      gltfScene.scene.rotation.y = -80;
+      gltfScene.scene.scale.set(30, 30, 30);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/monster_garden/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = 0;
+      gltfScene.scene.position.y = 50;
+      gltfScene.scene.position.z = 0;
+      gltfScene.scene.rotation.y = 0;
+      gltfScene.scene.scale.set(100, 100, 100);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/medieval_tower/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = 500;
+      gltfScene.scene.position.y = 0;
+      gltfScene.scene.position.z = 0;
+      gltfScene.scene.rotation.y = 80;
+      gltfScene.scene.scale.set(0.12, 0.12, 0.12);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/medieval_tower/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = 500;
+      gltfScene.scene.position.y = 0;
+      gltfScene.scene.position.z = -100;
+      gltfScene.scene.rotation.y = 80;
+      gltfScene.scene.scale.set(0.12, 0.12, 0.12);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/kokura_castle/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = -500;
+      gltfScene.scene.position.y = -190;
+      gltfScene.scene.position.z = 350;
+      gltfScene.scene.rotation.y = 80;
+      gltfScene.scene.scale.set(7, 7, 7);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/camp_fire/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = 0;
+      gltfScene.scene.position.y = 0;
+      gltfScene.scene.position.z = 50;
+      gltfScene.scene.scale.set(0.2, 0.2, 0.2);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/bench/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = 0;
+      gltfScene.scene.position.y = 0;
+      gltfScene.scene.position.z = 70;
+      gltfScene.scene.rotation.y = 80;
+      gltfScene.scene.scale.set(0.15, 0.15, 0.15);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/bench/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = 0;
+      gltfScene.scene.position.y = 0;
+      gltfScene.scene.position.z = 20;
+      gltfScene.scene.rotation.y = 80;
+      gltfScene.scene.scale.set(0.15, 0.15, 0.15);
+      this._scene.add(gltfScene.scene);
+    });
+
+    gltfLoader.load('./assets/house_model/scene.gltf', (gltfScene) =>{
+      gltfScene.scene.position.x = 500;
+      gltfScene.scene.position.y = -25 ;
+      gltfScene.scene.position.z = 250;
+      gltfScene.scene.rotation.y = 80;
+      gltfScene.scene.scale.set(10, 10, 10);
+      this._scene.add(gltfScene.scene);
+    });
+  
+  
+
+
+
     this._mixers = [];
     this._previousRAF = null;
 
-    let monsters = [];
+    this._collide = new Array();
     this._LoadAnimatedModel();
-    this._LoadMonster(20, 0, 0);
-    this._LoadMonster(20, 0, 10);
-    this._LoadMonster(20, 0, 20);
-    this._LoadMonster(20, 0, 30);
-    this._LoadMonster(-20, 0, 0);
-    this._LoadMonster(-20, 0, 10);
-    this._LoadMonster(-20, 0, 20);
-    this._LoadMonster(-20, 0, 30);
+
+      this._LoadMonster(-270, 0, -280);
+      this._LoadMonster(-270, 0, -240);
+      this._LoadMonster(-270, 0, -200);
+      this._LoadMonster(-270, 0, -160);
+    
+      
+      this._LoadMonster(-270, 0, 90);
+      this._LoadMonster(-270, 0, 130);
+      this._LoadMonster(-270, 0, 170);
+      this._LoadMonster(-270, 0, 210);
+  
+     
     this._RAF();
   }
 
@@ -622,12 +805,16 @@ class ThirdPersonCameraDemo {
         idle.play();
         this._scene.add(anim);
       });
-
       this._target = fbx;
       this._target.position.x = x;
       this._target.position.y = y;
       this._target.position.z = z;
+      this._target.rotation.y = -80;
+      // let BB = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+      // BB.setFromObject(this._target, true);
+      let BB = new Pos( this._target.position.x,  this._target.position.y,  this._target.position.z);
       this._scene.add(this._target);
+      this._collide.push(BB);
     });
 
   }
@@ -662,6 +849,10 @@ class ThirdPersonCameraDemo {
       this._threejs.render(this._scene, this._camera);
       this._Step(t - this._previousRAF);
       this._previousRAF = t;
+      // console.log(this._collide.length);
+      // console.log(this._collide[0].x, this._collide[0].y, this._collide[0].z);
+      // console.log(this._controls.Position.x, this._controls.Position.y, this._controls.Position.z);
+      
     });
   }
 
@@ -683,7 +874,7 @@ class ThirdPersonCameraDemo {
 let _APP = null;
 
 window.addEventListener('DOMContentLoaded', () => {
-  _APP = new ThirdPersonCameraDemo();
+  _APP = new Core();
 });
 
 
